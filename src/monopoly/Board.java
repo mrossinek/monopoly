@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 
 public class Board {
 	
-	private char[][] board;
-	private int rows;
-	private int cols;
-	private String file;
+	private char[][] board;     // board 2d-array
+	private int rows;           // number of rows on board
+	private int cols;           // number of columns on board
+	private String file;        // name of file the board is saved in
 	
 	public Board(String filename) {
 		
