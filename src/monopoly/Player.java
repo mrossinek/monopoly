@@ -2,11 +2,13 @@ package monopoly;
 
 public class Player {
 
-	public static int count; // total number of players
-	public int id;           // player ID: 1,2,...
-	public String name;      // name of player
-	public int money;        // money the player owns
-	public int position;     // current position on board: 0,1,...,39
+	private static int count; // total number of players
+	private int id;           // player ID: 1,2,...
+	private String name;      // name of player
+	private int money;        // money the player owns
+	private int position;     // current position on board: 0,1,...,39
+	private int last_pos;     // last position;
+	
 	
 	
 	public Player(String playername) {
@@ -16,35 +18,45 @@ public class Player {
 		name = playername;
 		money = 1500;
 		position = 0;
+		last_pos = 0;
 		
 	}
 	
-	public static void InitPlayers() {
+	public static void init_players() {
 		count = 0;
 	}
 	
-	public int GetPosition() {
-		return position;
+	public String get_name() {
+		return name;
 	}
 	
-	public void SetPosition(int pos) {
-		position = pos;
-	}
-	
-	public int GetMoney() {
+	public int get_money() {
 		return money;
 	}
 	
-	public void IncreaseMoney(int diff) {
+	public void increase_money(int diff) {
 		money += diff;
 	}
 	
-	public void DecreaseMoney(int diff) {
+	public void decrease_money(int diff) {
 		money -= diff;
 	}
 	
-	public void PrintPlayer() {
-		System.out.println(id+" :  "+name);
+	public int get_position() {
+		return position;
+	}
+	
+	public int get_lastpos() {
+		return last_pos;
+	}
+	
+	public void update_position(int pos) {
+		last_pos = position;
+		position = pos;
+	}
+	
+	public void print_player() {
+		System.out.println("Player "+id+" :  "+name);
 		System.out.println("Position :  "+position);
 		System.out.println("Money :  "+money);
 	}

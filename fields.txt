@@ -1,0 +1,40 @@
+0  Go      33 55
+1  Street  33 50 60  2  BR Old-Kent-Road
+2  Quest   33 45
+3  Street  33 40 60  4  BR Whitechapel-Road
+4  Tax     33 35 200       Income-Tax
+5  Station 33 30 200       Kings-Cross-Station
+6  Street  33 25 100 6  LB The-Angel-Islington
+7  Chance  33 20
+8  Street  33 15 100 6  LB Euston-Road
+9  Street  33 10 120 8  LB Pentonville-Road
+10 Jail    33 5
+11 Street  30 5  140 10 PK Pall-Mall
+12 Factory 27 5  150       Electric-Company
+13 Street  24 5  140 10 PK Whitehall
+14 Street  21 5  160 12 PK Northumberland-Avenue
+15 Station 18 5  200       Marylebone-Station
+16 Street  15 5  180 14 OR Bow-Street
+17 Quest   12 5
+18 Street  9  5  180 14 OR Marlborough-Street
+19 Street  6  5  200 16 OR Vine-Street
+20 Parking 3  5
+21 Street  3  10 220 18 RD The-Strand
+22 Chance  3  15
+23 Street  3  20 220 18 RD Fleet-Street
+24 Street  3  25 240 20 RD Trafalgar-Square
+25 Station 3  30 200       Fenchurch-Street-Station
+26 Street  3  35 260 22 YL Leicester-Square
+27 Street  3  40 260 22 YL Coventry-Street
+28 Factory 3  45 150       Water-Works
+29 Street  3  50 280 24 YL Piccadilly
+30 ToJail  3  55
+31 Street  6  55 300 26 GR Regent-Street
+32 Street  9  55 300 26 GR Oxford-Street
+33 Quest   12 55
+34 Street  15 55 320 28 GR Bond-Street
+35 Station 18 55 200       Liverpool-Street-Station
+36 Chance  21 55
+37 Street  24 55 350 35 BL Park-Lane
+38 Tax     27 55 100       Super-Tax
+39 Street  30 55 400 50 BL Mayfair
