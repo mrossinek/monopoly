@@ -123,7 +123,7 @@ public class Board {
 		board[last_coords[0]][last_coords[1]] = ' ';
 		board[new_coords[0]][new_coords[1]] = 'X';
 		
-		print_board();
+		new_field.analyze(pl);
 		
 	}
 

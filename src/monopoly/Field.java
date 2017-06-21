@@ -115,5 +115,47 @@ public class Field {
 		System.out.println("Field No. "+id+" :  "+name);
 	}
 	
+	
+	public void analyze(Player pl) {
+		
+		System.out.println("Player "+pl.get_name()+" landed on "+name);
+		
+		switch(type){
+		case Go:
+			pl.increase_money(400);
+			break;
+		case Parking:
+			pl.increase_money(value);
+			value = 0;
+			break;
+		case Jail:
+			break;
+		case ToJail:
+			pl.send_to_jail();
+			break;
+		case Chance:
+			// TODO implement Chance cards
+			break;
+		case Quest:
+			// TODO implement Quest cards
+			break;
+		case Tax:
+			pl.decrease_money(cost);
+			break;
+		case Factory:
+			// TODO
+			break;
+		case Station:
+			// TODO
+			break;
+		case Street:
+			// TODO
+			break;
+		default:
+			System.err.println("An unknown error occured during the move analysis.");
+		}
+		
+	}
+	
 
 }

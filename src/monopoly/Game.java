@@ -32,15 +32,20 @@ public class Game {
 		ArrayList<Field> ListOfFields = new ArrayList<Field>();
 		board.setup_fields("fields.txt", ListOfFields);
 		
-		ListIterator<Field> it = ListOfFields.listIterator();
+		// ListIterator<Field> it = ListOfFields.listIterator();
 		
-		while (it.hasNext()) {
-			Field field = it.next();
-			field.print_field();
-		}
+		// while (it.hasNext()) {
+		//	Field field = it.next();
+		//	field.print_field();
+		// }
 		
 		board.update_player_position(max, ListOfFields);
+		board.update_player_position(flo, ListOfFields);
+		
+		max.do_turn();
+		board.update_player_position(max, ListOfFields);
 
+		board.print_board();
 		
 	}
 	
