@@ -2,6 +2,7 @@ package monopoly;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class Board {
 	
@@ -109,22 +110,38 @@ public class Board {
 	}
 	
 	
-	public void update_player_position(Player pl, ArrayList<Field> fields) {
+	public void check_fields(ArrayList<Field> fields) {
+		ListIterator<Field> it = fields.listIterator();
 		
-		int last_pos = pl.get_lastpos();
-		int position = pl.get_position();
-		
-		Field last_field = fields.get(last_pos);
-		Field new_field = fields.get(position);
-		
-		int[] last_coords = last_field.get_coordinates();
-		int[] new_coords = new_field.get_coordinates();
-		
-		board[last_coords[0]][last_coords[1]] = ' ';
-		board[new_coords[0]][new_coords[1]] = 'X';
-		
-		new_field.analyze(pl);
-		
+		while (it.hasNext()) {
+			Field field = it.next();
+			field.print_field();
+		}
+	}
+	
+	public void place_player(Player pl, ArrayList<Field> fields) {
+		int pos = pl.get_position();
+		Field field = fields.get(pos);
+		int[] coords = field.get_coordinates();
+		field.increase_player_count();
+		board[coords[0]][coords[1]] = 'X';
+	}
+	
+	
+	public void remove_player(Player pl, ArrayList<Field> fields) {
+		int pos = pl.get_position();
+		Field field = fields.get(pos);
+		int[] coords = field.get_coordinates();
+		int count = field.get_player_count();
+		switch (count) {
+		case 0:
+			System.err.println("There appears to be no player on this field:");
+			break;
+		case 1:
+			board[coords[0]][coords[1]] = ' ';
+			break;
+		default:
+		}
 	}
 
 	

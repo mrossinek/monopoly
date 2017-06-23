@@ -12,7 +12,8 @@ public class Field {
 	private int value;                       // initial value of field
 	private int cost;                        // cost to be paid on field
 	
-	private boolean forsale;                    // is field for sale? 
+	private int ownerID;                    //  0 : field is for sale
+	private int player_count;               // player count on field
 	
 	
 	public Field(String[] args) {
@@ -21,56 +22,50 @@ public class Field {
 		type = FieldType.valueOf(args[1]);
 		coordinates[0] = Integer.parseInt(args[2]);
 		coordinates[1] = Integer.parseInt(args[3]);
+		player_count = 0;
 		
 		switch(type) {
 		case Go:
 			name = "Go";
-			forsale = false;
 			break;
 		case Parking:
 			name = "Free-Parking";
 			value = 0;
-			forsale = false;
 			break;
 		case Jail:
 			name = "Jail";
-			forsale = false;
 			break;
 		case ToJail:
 			name = "Go-To-Jail";
-			forsale = false;
 			break;
 		case Chance:
 			name = "Chance";
-			forsale = false;
 			break;
 		case Quest:
 			name = "Community-Chest";
-			forsale = false;
 			break;
 		case Tax:
 			cost = Integer.parseInt(args[4]);
 			name = args[5];
-			forsale = false;
 			break;
 		case Factory:
 			value = Integer.parseInt(args[4]);
 			name = args[5];
 			cost = 4;
-			forsale = true;
+			ownerID = 0;
 			break;
 		case Station:
 			value = Integer.parseInt(args[4]);
 			name = args[5];
 			cost = 25;
-			forsale = true;
+			ownerID = 0;
 			break;
 		case Street:
 			value = Integer.parseInt(args[4]);
 			cost = Integer.parseInt(args[5]);
 			color = StreetColor.valueOf(args[6]);
 			name = args[7];
-			forsale = true;
+			ownerID = 0;
 			break;
 		default:
 			System.err.println(type+" is not a valid field type.");
@@ -106,8 +101,20 @@ public class Field {
 		return cost;
 	}
 	
-	public boolean get_forsale() {
-		return forsale;
+	public int get_ownerID() {
+		return ownerID;
+	}
+	
+	public int get_player_count() {
+		return player_count;
+	}
+	
+	public void increase_player_count() {
+		player_count++;
+	}
+	
+	public void decrease_player_count() {
+		player_count--;
 	}
 	
 	

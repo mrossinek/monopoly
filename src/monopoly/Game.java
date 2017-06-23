@@ -1,12 +1,11 @@
 package monopoly;
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 public class Game {
 
 	public static void main(String[] args) {
 		
-		welcome();
+		Game.welcome();
 		
 		Dice.test_fairness();
 		
@@ -31,21 +30,23 @@ public class Game {
 		
 		ArrayList<Field> ListOfFields = new ArrayList<Field>();
 		board.setup_fields("fields.txt", ListOfFields);
+		board.check_fields(ListOfFields);
 		
-		// ListIterator<Field> it = ListOfFields.listIterator();
+		System.out.println();
+		System.out.println();
 		
-		// while (it.hasNext()) {
-		//	Field field = it.next();
-		//	field.print_field();
-		// }
+		board.place_player(max, ListOfFields);
+		board.place_player(flo, ListOfFields);
 		
-		board.update_player_position(max, ListOfFields);
-		board.update_player_position(flo, ListOfFields);
+		int turns = 10;
 		
-		max.do_turn();
-		board.update_player_position(max, ListOfFields);
-
-		board.print_board();
+		while (turns>0) {
+			max.do_turn(board, ListOfFields);
+			board.print_board();
+			flo.do_turn(board, ListOfFields);
+			board.print_board();
+			turns--;
+		}
 		
 	}
 	

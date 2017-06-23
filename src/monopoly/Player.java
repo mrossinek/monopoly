@@ -1,15 +1,15 @@
 package monopoly;
+import java.util.ArrayList;
 
 public class Player {
 
-	private static int count; // total number of players
-	private int id;           // player ID: 1,2,...
-	private String name;      // name of player
-	private int money;        // money the player owns
-	private int position;     // current position on board: 0,1,...,39
-	private int last_pos;     // last position;
-	private int jail_count;   // counter for jail time
-	
+	private static int count;  // total number of players
+	private int id;            // player ID: 1,2,...
+	private String name;       // name of player
+	private int money;         // money the player owns
+	private int position;      // current position on board: 0,1,...,39
+	private int jail_count;    // counter for jail time
+	private boolean[] streets; // fields owned by player
 	
 	
 	public Player(String playername) {
@@ -19,12 +19,8 @@ public class Player {
 		name = playername;
 		money = 1500;
 		position = 0;
-		last_pos = 0;
+		streets = new boolean[40];
 		
-	}
-	
-	public static void init_players() {
-		count = 0;
 	}
 	
 	public String get_name() {
@@ -47,13 +43,12 @@ public class Player {
 		return position;
 	}
 	
-	public int get_lastpos() {
-		return last_pos;
+	public void update_position(int num) {
+		position = (position + num) % 40;
 	}
 	
-	public void update_position(int num) {
-		last_pos = position;
-		position = (position + num) % 40;
+	public boolean check_ownage(int fieldID) {
+		return streets[fieldID];
 	}
 	
 	public void print_player() {
@@ -62,19 +57,20 @@ public class Player {
 		System.out.println("Money :  "+money);
 	}
 	
-	public void do_turn() {
-		
+	public void do_turn(Board board, ArrayList<Field> fields) {
 		int num = Dice.throw_dice(2);
+		board.remove_player(this, fields);
 		update_position(num);
-		
+		board.place_player(this, fields);
 	}
 	
 	public void send_to_jail() {
-		
-		last_pos = position;
 		position = 10;
 		jail_count = 3;
-		
+	}
+	
+	public int check_jailtime() {
+		return --jail_count;
 	}
 	
 }
