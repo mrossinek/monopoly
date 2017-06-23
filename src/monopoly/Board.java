@@ -9,7 +9,7 @@ public class Board {
 	private char[][] board;     // board 2d-array
 	private int rows;           // number of rows on board
 	private int cols;           // number of columns on board
-	private String board_file;        // name of file the board is saved in
+	private String board_file;  // name of file the board is saved in
 	private String fields_file; // name of file the fields are saved in
 	
 	
@@ -71,6 +71,7 @@ public class Board {
 	
 	
 	public void print_board() {
+		System.out.println();
 		
 		for (int m=0; m<rows; ++m) {
 			for (int n=0; n<cols; ++n) {
@@ -111,8 +112,9 @@ public class Board {
 	
 	
 	public void check_fields(ArrayList<Field> fields) {
+		System.out.println();
 		ListIterator<Field> it = fields.listIterator();
-		
+
 		while (it.hasNext()) {
 			Field field = it.next();
 			field.print_field();
@@ -125,6 +127,7 @@ public class Board {
 		int[] coords = field.get_coordinates();
 		field.increase_player_count();
 		board[coords[0]][coords[1]] = 'X';
+		// System.out.println("Placing player "+pl.get_name()+" on field "+field.get_name()+"  (#players: "+field.get_player_count()+")");
 	}
 	
 	
@@ -136,12 +139,15 @@ public class Board {
 		switch (count) {
 		case 0:
 			System.err.println("There appears to be no player on this field:");
-			break;
+			return;
 		case 1:
 			board[coords[0]][coords[1]] = ' ';
+			field.decrease_player_count();
 			break;
 		default:
+			field.decrease_player_count();
 		}
+		// System.out.println("Removing player "+pl.get_name()+" from field "+field.get_name()+"  (#players: "+field.get_player_count()+")");
 	}
 
 	

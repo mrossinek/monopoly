@@ -54,7 +54,7 @@ public class Dice {
 		System.out.println(" Ave:  "+ave);
 		System.out.println(" StD:  "+std);
 		
-		if (std < 0.01) {
+		if (std < 0.05) {
 			System.out.println("The dice appears to be working fine!");
 		} else {
 			System.err.println("The random generator did not succeed.");

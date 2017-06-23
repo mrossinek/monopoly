@@ -1,4 +1,5 @@
 package monopoly;
+import java.util.ArrayList;
 
 public class Field {
 	
@@ -97,6 +98,10 @@ public class Field {
 		return value;
 	}
 	
+	public void set_value(int val) {
+		value = val;
+	}
+	
 	public int get_cost() {
 		return cost;
 	}
@@ -123,22 +128,27 @@ public class Field {
 	}
 	
 	
-	public void analyze(Player pl) {
+	public void analyze(Player pl, Board board, ArrayList<Field> fields) {
 		
-		System.out.println("Player "+pl.get_name()+" landed on "+name);
+		System.out.println(pl.get_name()+" landed on "+name);
 		
 		switch(type){
 		case Go:
 			pl.increase_money(400);
+			System.out.println(pl.get_name()+" receives $400!");
+			System.out.println(pl.get_name()+" now ownes $"+pl.get_money());
 			break;
 		case Parking:
 			pl.increase_money(value);
-			value = 0;
+			System.out.println(pl.get_name()+" receives $"+value+" from "+name);
+			System.out.println(pl.get_name()+" now ownes $"+pl.get_money());
+			set_value(0);
 			break;
 		case Jail:
+			System.out.println("... but he is only visiting.");
 			break;
 		case ToJail:
-			pl.send_to_jail();
+			pl.send_to_jail(board, fields);
 			break;
 		case Chance:
 			// TODO implement Chance cards
@@ -148,6 +158,10 @@ public class Field {
 			break;
 		case Tax:
 			pl.decrease_money(cost);
+			update_free_parking(fields.get(20), cost);
+			System.out.println(pl.get_name()+" had to pay $"+cost);
+			System.out.println(pl.get_name()+" now ownes $"+pl.get_money());
+			System.out.println("Free Parking now holds $"+check_free_parking(fields.get(20)));
 			break;
 		case Factory:
 			// TODO
@@ -160,6 +174,34 @@ public class Field {
 			break;
 		default:
 			System.err.println("An unknown error occured during the move analysis.");
+		}
+		
+	}
+	
+	
+	public boolean validate_free_parking(Field park) {
+		
+		if (park.get_name() != "Free-Parking") {
+			System.err.println("Free Parking appears to be assigned to the wrong fields ID.");
+			return false;
+		}
+		return true;
+	}
+	
+	
+	public int check_free_parking(Field park) {
+		
+		if (validate_free_parking(park)) {
+			return park.get_value();
+		} else {
+			return -1;
+		}
+	}
+	
+	public void update_free_parking(Field park, int diff) {
+		
+		if (validate_free_parking(park)) {
+			park.set_value(park.get_value()+diff);
 		}
 		
 	}
