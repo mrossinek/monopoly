@@ -1,16 +1,20 @@
 package monopoly;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Game {
 
 	public static void main(String[] args) {
 		
+		Scanner scanner = new Scanner(System.in);
+		
 		Game.welcome();
 		
 		Dice.test_fairness();
 		
-		Player max = new Player("Max");
-		Player flo = new Player("Flo");
+		ArrayList<Player> ListOfPlayers = new ArrayList<Player>();
+		Player max = new Player("Max", ListOfPlayers);
+		Player flo = new Player("Flo", ListOfPlayers);
 		
 		System.out.println();
 		
@@ -34,15 +38,21 @@ public class Game {
 		board.place_player(max, ListOfFields);
 		board.place_player(flo, ListOfFields);
 		
-		int turns = 10;
+		// int turns = 10;
 		
-		while (turns>0) {
-			max.do_turn(board, ListOfFields);
-			board.print_board();
-			flo.do_turn(board, ListOfFields);
-			board.print_board();
-			turns--;
-		}
+		//while (turns>0) {
+		//	max.do_turn(board, ListOfFields, ListOfPlayers, scanner);
+		//	board.print_board();
+		//	flo.do_turn(board, ListOfFields, ListOfPlayers, scanner);
+		//	board.print_board();
+		//	turns--;
+		//}
+		
+		max.dice = 12;
+		// flo.buy(12, ListOfFields);
+		flo.buy(28, ListOfFields);
+		max.set_position(12);
+		ListOfFields.get(12).analyze(max, board, ListOfFields, ListOfPlayers, scanner);
 		
 	}
 	
