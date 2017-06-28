@@ -19,9 +19,10 @@ public class Player {
 	private String name;       // name of player
 	private int money;         // money the player owns
 	private int position;      // current position on board: 0,1,...,39
-	private int jailCount;    // counter for jail time
+	private int jailCount;     // counter for jail time
 	private boolean[] streets; // fields owned by player
 	public int dice;           // current dice throw
+	public boolean pasch;      // current pasch
 
 
 	public Player() {
@@ -117,6 +118,11 @@ public class Player {
 	}
 
 
+	public void sendToJail(Board board, ArrayList<Field> fields) {
+		fields.get(position).toJail(this, board, fields);
+	}
+
+
 	public void buy(Field field, ArrayList<Field> fields) {
 		int cost = field.getValue();
 		int fieldID = field.getId();
@@ -138,29 +144,45 @@ public class Player {
 	}
 
 
-	public void doTurn(Board board, ArrayList<Field> fields, ArrayList<Player> players, Scanner in) {
-
+	public boolean throwDice(Scanner in) {
 		System.out.println();
-		System.out.println(name + "'s turn");
-
 		System.out.println("Press ENTER to roll the dices");
 		in.nextLine();
 
-		if (getJailCount() != 0) {
-			updateJailCount(-1);
+		int[] diceThrows = Dice.throwDiceTwice();
+		dice = diceThrows[0] + diceThrows[1];
+		pasch = (diceThrows[0] == diceThrows[1]);
 
-			if (getJailCount() == 0) {
-				System.out.println(name + " has been released from jail.");
-				return;
-			} else {
-				System.out.println(name + " is in jail!");
-				System.out.println("Turns left in jail: " + getJailCount());
-				return;
-			}
+		if (pasch) {
+			System.out.println(name + " threw a Pasch of " + (dice/2));
+			System.out.println(name + " will get another turn!");
+		} else {
+			System.out.println(name + " threw a " + dice);
 		}
 
-		dice = Dice.throwDice(2);
-		System.out.println(name + " threw a " + dice);
+		return pasch;
+	}
+
+
+	public void doTurn(Board board, ArrayList<Field> fields, ArrayList<Player> players, Scanner in) {
+
+		if (jailCount != 0) {
+			if (pasch) {
+				System.out.println("The Pasch released " + name + " out of jail early!");
+				updateJailCount(-jailCount);
+			} else {
+				updateJailCount(-1);
+
+				if (jailCount == 0) {
+					System.out.println(name + " has been released from jail regularly.");
+					return;
+				} else {
+					System.out.println(name + " remains in jail!");
+					System.out.println("Turns left in jail: " + jailCount);
+					return;
+				}
+			}
+		}
 
 		board.removePlayer(this, fields);
 		updatePosition();
@@ -170,8 +192,6 @@ public class Player {
 		fields.get(position).analyze(this, board, fields, players, in);
 		in.nextLine();
 
-		System.out.println("Press ENTER to end your turn");
-		in.nextLine();
 	}
 
 

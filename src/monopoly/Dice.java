@@ -11,18 +11,18 @@ package monopoly;
 
 public class Dice {
 
+	public static int throwDiceOnce() {
+		return (int) (Math.random() * 6) + 1;
+	}
 
-	public static int throwDice(int times) {
-		int sum = 0;
-		double random = 0.0;
+	public static int[] throwDiceTwice() {
+		int[] values = new int[2];
 
-		while (times > 0) {
-			random = Math.random();
-			sum += (int) (random * 6) + 1;
-			times--;
+		for (int i=0; i<2; ++i) {
+			values[i] = (int) (Math.random() * 6) + 1;
 		}
 
-		return sum;
+		return values;
 	}
 
 
@@ -37,7 +37,7 @@ public class Dice {
 		System.out.println("Test dice for fairness...");
 
 		for (int i=1; i<=total; i++) {
-			int val = throwDice(1);
+			int val = throwDiceOnce();
 			numbers[val-1] += 1;
 		}
 

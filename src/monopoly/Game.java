@@ -52,6 +52,7 @@ public class Game {
 		board.checkFields(listOfFields);
 
 		System.out.println();
+		System.out.println();
 
 		System.out.println("How many players are going to play?");
 
@@ -88,14 +89,44 @@ public class Game {
 		}
 
 		System.out.println();
+		System.out.println();
+		System.out.println();
 
 		System.out.println("Let's start!");
 		scanner.nextLine();
 
+		System.out.println();
+
 		while (game.running) {
+
 			for (Player pl : listOfPlayers) {
-				pl.doTurn(board, listOfFields, listOfPlayers, scanner);
+
+				System.out.println();
+				System.out.println(pl.getName() + "'s turn");
+
+				int paschCount = 0;
+				boolean pasch = false;
+
+				do {
+					pasch = pl.throwDice(scanner);
+
+					if (pasch) {
+						paschCount++;
+
+						if (paschCount == 3) {
+							System.out.println(pl.getName() + " threw 3 Pasch in a row!");
+							pl.sendToJail(board, listOfFields);
+							break;
+						}
+					}
+					pl.doTurn(board, listOfFields, listOfPlayers, scanner);
+				} while (pasch);
+
+				System.out.println("Press ENTER to end your turn");
+				scanner.nextLine();
+
 			}
+
 		}
 
 

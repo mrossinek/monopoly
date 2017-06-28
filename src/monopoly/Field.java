@@ -356,7 +356,7 @@ public class Field {
 		boolean defaultCase = false;
 
 		if (owner == pl.getId()) {
-			System.out.println("He already owns this " + type);
+			System.out.println(pl.getName() + " already owns this " + type);
 		} else {
 			switch (owner) {
 			case 0:
