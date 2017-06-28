@@ -86,6 +86,7 @@ public class Field {
 
 	}
 
+
 	public int getId() {
 		return id;
 	}
@@ -185,11 +186,13 @@ public class Field {
 
 	}
 
+
 	public void go(Player pl) {
 		pl.increaseMoney(400);
 		System.out.println(pl.getName() + " receives $400!");
 		System.out.println(pl.getName() + " now ownes $" + pl.getMoney());
 	}
+
 
 	public void parking(Player pl) {
 		pl.increaseMoney(value);
@@ -197,6 +200,7 @@ public class Field {
 		System.out.println(pl.getName() + " now ownes $" + pl.getMoney());
 		setValue(0);
 	}
+
 
 	public boolean validateParking(Field park) {
 
@@ -207,6 +211,7 @@ public class Field {
 		return true;
 	}
 
+
 	public int checkParking(Field park) {
 
 		if (validateParking(park)) {
@@ -216,6 +221,7 @@ public class Field {
 		}
 	}
 
+
 	public void updateParking(Field park, int diff) {
 
 		if (validateParking(park)) {
@@ -224,9 +230,11 @@ public class Field {
 
 	}
 
+
 	public void jail() {
 		System.out.println("... but he is only visiting.");
 	}
+
 
 	public void toJail(Player pl, Board board, ArrayList<Field> fields) {
 		pl.updateJailCount(3);
@@ -236,6 +244,7 @@ public class Field {
 		System.out.println(pl.getName() + " has been sent to the jail!");
 	}
 
+
 	public void tax(Player pl, ArrayList<Field> fields) {
 		pl.decreaseMoney(cost);
 		updateParking(fields.get(20), cost);
@@ -244,11 +253,13 @@ public class Field {
 		System.out.println("Free Parking now holds $"+checkParking(fields.get(20)));
 	}
 
+
 	public void pickChance(Player pl) {
 		System.out.println(pl.getName() + " picked a Chance card:");
 		System.err.println("Not implemented yet.");
 		// TODO implement Chance cards
 	}
+
 
 	public void pickQuest(Player pl) {
 		System.out.println(pl.getName() + " picked a Community Chest card:");
@@ -256,21 +267,12 @@ public class Field {
 		// TODO implement Community Chest cards
 	}
 
+
 	public void factory(Player pl, ArrayList<Player> players, ArrayList<Field> fields, Scanner in) {
 
 		int owner = findOwner();
 
-		switch (owner) {
-		case 0:
-			if (checkBuying(pl)) {
-				if(chooseBuying(in)) {
-					pl.buy(this, fields);
-					System.out.println(pl.getName() + " successfully bought " + name);
-					System.out.println(pl.getName() + " now owns $" + pl.getMoney());
-				}
-			}
-			break;
-		default:
+		if (switchOwner(owner, pl, in, fields)) {
 			Player boss = new Player();
 			boss = findBoss(owner, players);
 
@@ -280,7 +282,7 @@ public class Field {
 			switch (count) {
 			case 1:
 				diff = cost*pl.dice;
-				System.out.println(boss.getName() + " owns " + count + " Factory.");
+				System.out.println(boss.getName() + " owns " + count + " Factories.");
 				System.out.println("Thus the cost is " + cost + "*" + pl.dice + "=$" + diff);
 				transaction(diff, pl, boss);
 				break;
@@ -298,21 +300,12 @@ public class Field {
 		}
 	}
 
+
 	public void station(Player pl, ArrayList<Player> players, ArrayList<Field> fields, Scanner in) {
 
 		int owner = findOwner();
 
-		switch (owner) {
-		case 0:
-			if (checkBuying(pl)) {
-				if(chooseBuying(in)) {
-					pl.buy(this, fields);
-					System.out.println(pl.getName() + " successfully bought " + getName());
-					System.out.println(pl.getName() + " now owns $" + pl.getMoney());
-				}
-			}
-			break;
-		default:
+		if (switchOwner(owner, pl, in, fields)) {
 			Player boss = new Player();
 			boss = findBoss(owner, players);
 
@@ -337,17 +330,7 @@ public class Field {
 
 		int owner = findOwner();
 
-		switch (owner) {
-		case 0:
-			if (checkBuying(pl)) {
-				if(chooseBuying(in)) {
-					pl.buy(this, fields);
-					System.out.println(pl.getName() + " successfully bought " + name);
-					System.out.println(pl.getName() + " now owns $" + pl.getMoney());
-				}
-			}
-			break;
-		default:
+		if (switchOwner(owner, pl, in, fields)) {
 			Player boss = new Player();
 			boss = findBoss(owner, players);
 
@@ -369,6 +352,32 @@ public class Field {
 	}
 
 
+	public boolean switchOwner(int owner, Player pl, Scanner in, ArrayList<Field> fields) {
+		boolean defaultCase = false;
+
+		if (owner == pl.getId()) {
+			System.out.println("He already owns this " + type);
+		} else {
+			switch (owner) {
+			case 0:
+				if (checkBuying(pl)) {
+					if(chooseBuying(in)) {
+						pl.buy(this, fields);
+						System.out.println(pl.getName() + " successfully bought " + getName());
+						System.out.println(pl.getName() + " now owns $" + pl.getMoney());
+					}
+				}
+				break;
+			default:
+				defaultCase = true;
+				break;
+			}
+		}
+
+		return defaultCase;
+	}
+
+
 	public Player findBoss(int owner, ArrayList<Player> players) {
 		for (Player p : players) {
 			if (p.getId() == owner) {
@@ -377,6 +386,7 @@ public class Field {
 		}
 		return null;  // owner not found
 	}
+
 
 	public int countType(ArrayList<Field> fields, FieldType type, Player boss) {
 		int count = 0;
@@ -395,25 +405,27 @@ public class Field {
 		return count;
 	}
 
+
 	public boolean checkBuying(Player pl) {
 		System.out.println("This " + type.name() + " is still for sale!");
 		int value = getValue();
 		System.out.println("Its value is : $" + value);
 		int money = pl.getMoney();
-		System.out.println("You currently own $" + money);
+		System.out.println("He currently owns $" + money);
 		if (money < value) {
-			System.out.println("You cannot afford to buy this " + type.name());
+			System.out.println("He cannot afford to buy this " + type.name());
 			return false;
 		}
 		return true;
 	}
+
 
 	public boolean chooseBuying(Scanner in) {
 		boolean buy = false;
 		boolean makeValidChoice = false;
 
 		while (!makeValidChoice) {
-			System.out.println("Would you like to buy this " + type.name() + "? Y/N");
+			System.out.println("Would he like to buy this " + type.name() + "? Y/N");
 			char choice = in.next().charAt(0);
 			switch (choice) {
 			case 'y': case 'Y':
@@ -433,11 +445,13 @@ public class Field {
 		return buy;
 	}
 
+
 	public void transaction(int diff, Player pl, Player boss) {
 		pl.decreaseMoney(diff);
 		boss.increaseMoney(diff);
 		System.out.println(pl.getName() + " now owns $" + pl.getMoney());
 		System.out.println(boss.getName() + " now owns $" + boss.getMoney());
 	}
+
 
 }
