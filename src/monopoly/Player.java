@@ -7,8 +7,8 @@
  */
 
 package monopoly;
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class Player {

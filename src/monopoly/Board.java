@@ -10,7 +10,6 @@ package monopoly;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 
 public class Board {
@@ -119,11 +118,8 @@ public class Board {
 
 	public void checkFields(ArrayList<Field> fields) {
 		System.out.println();
-		ListIterator<Field> it = fields.listIterator();
-
-		while (it.hasNext()) {
-			Field field = it.next();
-			field.printField();
+		for (Field f : fields) {
+			f.printField();
 		}
 	}
 
