@@ -155,7 +155,6 @@ public class Player {
 
 		if (pasch) {
 			System.out.println(name + " threw a Pasch of " + (dice/2));
-			System.out.println(name + " will get another turn!");
 		} else {
 			System.out.println(name + " threw a " + dice);
 		}

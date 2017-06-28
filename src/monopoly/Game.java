@@ -122,8 +122,13 @@ public class Game {
 					pl.doTurn(board, listOfFields, listOfPlayers, scanner);
 				} while (pasch);
 
-				System.out.println("Press ENTER to end your turn");
-				scanner.nextLine();
+				if (pl.getMoney() < 0) {
+					System.out.println(pl.getName() + " went bankrupt!");
+					game.running = false;
+				} else {
+					System.out.println("Press ENTER to end your turn");
+					scanner.nextLine();
+				}
 
 			}
 
