@@ -8,6 +8,8 @@
 
 package monopoly;
 import java.util.Scanner;
+import java.io.FileReader;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 
 
@@ -22,13 +24,35 @@ public class Game {
 
 	public static void main(String[] args) {
 
-		if (args.length != 2) {
-			System.err.println("Usage: java monopoly.Game [board file] [fields file]");
+		if (args.length != 1) {
+			System.err.println("Usage: java monopoly.Game [parameter file]");
 			return;
 		}
 
-		String boardFile = args[0];
-		String fieldsFile = args[1];
+		String parameters = args[0];
+		String boardFile = "";
+		String fieldsFile = "";
+		String chanceFile = "";
+		String questFile = "";
+
+		try {
+			FileReader paramFile = new FileReader(parameters);
+			BufferedReader reader = new BufferedReader(paramFile);
+
+			reader.readLine();  // discard comment line
+
+			boardFile = reader.readLine();
+			fieldsFile = reader.readLine();
+			chanceFile = reader.readLine();
+			questFile = reader.readLine();
+
+			reader.close();
+			paramFile.close();
+
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
 		Scanner scanner = new Scanner(System.in);
 
 		Game game = new Game();
