@@ -1,0 +1,40 @@
+0  Go      33 55
+1  Street  33 50 60  2  BR Badstrasse
+2  Quest   33 45
+3  Street  33 40 60  4  BR Turmstrasse
+4  Tax     33 35 200       Einkommenssteuer
+5  Station 33 30 200       Suedbahnhof
+6  Street  33 25 100 6  LB Chausseestrasse
+7  Chance  33 20
+8  Street  33 15 100 6  LB Elisenstrasse
+9  Street  33 10 120 8  LB Poststrasse
+10 Jail    33 5
+11 Street  30 5  140 10 PK Seestrasse
+12 Factory 27 5  150       Elektrizitaetswerk
+13 Street  24 5  140 10 PK Hafenstrasse
+14 Street  21 5  160 12 PK Neue-Strasse
+15 Station 18 5  200       Westbahnhof
+16 Street  15 5  180 14 OR Muenchner-Strasse
+17 Quest   12 5
+18 Street  9  5  180 14 OR Wiener-Strasse
+19 Street  6  5  200 16 OR Berliner-Strasse
+20 Parking 3  5
+21 Street  3  10 220 18 RD Theaterstrasse
+22 Chance  3  15
+23 Street  3  20 220 18 RD Museumsstrasse
+24 Street  3  25 240 20 RD Opernplatz
+25 Station 3  30 200       Nordbahnhof
+26 Street  3  35 260 22 YL Lessingstrasse
+27 Street  3  40 260 22 YL Schillerstrasse
+28 Factory 3  45 150       Wasserwerk
+29 Street  3  50 280 24 YL Goethestrasse
+30 ToJail  3  55
+31 Street  6  55 300 26 GR Rathausplatz
+32 Street  9  55 300 26 GR Hauptstrasse
+33 Quest   12 55
+34 Street  15 55 320 28 GR Bahnhofstrasse
+35 Station 18 55 200       Hauptbahnhof
+36 Chance  21 55
+37 Street  24 55 350 35 BL Parkstrasse
+38 Tax     27 55 100       Zustatzsteuer
+39 Street  30 55 400 50 BL Schlossallee

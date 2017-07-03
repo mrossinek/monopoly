@@ -6,8 +6,8 @@
    .---.                                             .---.   
 OR |   |                                             |   | GR
    `---´          G - Go                             `---´   
-   .---.          P - Parking                        .---.   
-OR |   |          J - Jail / Go to Jai               |   | GR
+   .---.          P - Free Parking                   .---.   
+OR |   |          J - Jail / Go to Jail              |   | GR
    `---´          S - Station                        `---´   
    .---.          F - Factory                        .---.   
  Q |   |          T - Tax                            |   | Q 

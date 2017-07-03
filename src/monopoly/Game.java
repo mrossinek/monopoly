@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class Game {
 
+	public static Language language;
 	public boolean running;
 
 	public Game() {
@@ -28,10 +29,11 @@ public class Game {
 			System.err.println("Usage: java monopoly.Game [parameter file]");
 			System.out.println("The parameter file has to include the following lines:");
 			System.out.println(" 1  // descriptive comment");
-			System.out.println(" 2  path to board file");
-			System.out.println(" 3  path to fields file");
-			System.out.println(" 4  path to chance cards file");
-			System.out.println(" 5  path to community chest cards file");
+			System.out.println(" 2  language choice");
+			System.out.println(" 3  path to board file");
+			System.out.println(" 4  path to fields file");
+			System.out.println(" 5  path to chance cards file");
+			System.out.println(" 6  path to community chest cards file");
 			return;
 		}
 
@@ -46,6 +48,8 @@ public class Game {
 			BufferedReader reader = new BufferedReader(paramFile);
 
 			reader.readLine();  // discard comment line
+
+			language = Language.valueOf(reader.readLine());
 
 			boardFile = reader.readLine();
 			fieldsFile = reader.readLine();

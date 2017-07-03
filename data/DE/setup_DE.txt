@@ -1,0 +1,6 @@
+// monopoly paramter file
+DE
+../data/DE/board_DE.txt
+../data/DE/fields_DE.txt
+../data/DE/chances_DE.txt
+../data/DE/quests_DE.txt

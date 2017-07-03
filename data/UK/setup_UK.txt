@@ -1,0 +1,6 @@
+// monopoly paramter file
+UK
+../data/UK/board_UK.txt
+../data/UK/fields_UK.txt
+../data/UK/chances_UK.txt
+../data/UK/quests_UK.txt

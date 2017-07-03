@@ -1,5 +1,0 @@
-// monopoly paramter file
-../board.txt
-../fields.txt
-../chances.txt
-../quests.txt
