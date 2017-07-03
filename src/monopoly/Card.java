@@ -178,3 +178,17 @@ public class Card {
 
 
 }
+
+
+/* possible actions happening:
+  get money
+    -> receive from bank GET_BA
+    -> receive from all other players GET_PL
+  pay money
+    -> pay to free parking PAY_FP
+    -> pay to all other players PAY_PL
+  move to field
+    -> get money on the way MOVE_Y
+    -> do not get money on the way MOVE_N
+  receive a get-out-of-jail card JAIL_CARD
+*/

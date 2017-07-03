@@ -18,6 +18,7 @@ public class Player {
 	private int money;         // money the player owns
 	private int position;      // current position on board: 0,1,...,39
 	private int jailCount;     // counter for jail time
+	private int freeJailCard;  // counter of get-out-of-jail cards
 	private boolean[] streets; // fields owned by player
 	public int dice;           // current dice throw
 	public boolean pasch;      // current pasch
@@ -35,6 +36,7 @@ public class Player {
 		money = 1500;
 		position = 0;
 		jailCount = 0;
+		freeJailCard = 0;
 		streets = new boolean[40];  // initializes to false
 
 		players.add(this);
@@ -98,8 +100,22 @@ public class Player {
 		return jailCount;
 	}
 
+
 	public void updateJailCount(int diff) {
 		jailCount += diff;
+	}
+
+
+	public int getFreeJailCard() {
+		return freeJailCard;
+	}
+
+	public void decreaseFreeJailCard() {
+		freeJailCard--;
+	}
+
+	public void increaseFreeJailCard() {
+		freeJailCard++;
 	}
 
 
@@ -164,19 +180,24 @@ public class Player {
 	public void doTurn(Board board, ArrayList<Field> fields, ArrayList<Player> players, ArrayList<Card> chanceDeck, ArrayList<Card> questDeck, Scanner in) {
 
 		if (jailCount != 0) {
-			if (pasch) {
-				System.out.println("The Pasch released " + name + " out of jail early!");
+			if (freeJailCard > 0) {
+				System.out.println(name + " used his get-out-of-jail card!");
 				updateJailCount(-jailCount);
+				decreaseFreeJailCard();
 			} else {
-				updateJailCount(-1);
-
-				if (jailCount == 0) {
-					System.out.println(name + " has been released from jail regularly.");
-					return;
+				if (pasch) {
+					System.out.println("The Pasch released " + name + " out of jail early!");
+					updateJailCount(-jailCount);
 				} else {
-					System.out.println(name + " remains in jail!");
-					System.out.println("Turns left in jail: " + jailCount);
-					return;
+					updateJailCount(-1);
+					if (jailCount == 0) {
+						System.out.println(name + " has been released from jail regularly.");
+						return;
+					} else {
+						System.out.println(name + " remains in jail!");
+						System.out.println("Turns left in jail: " + jailCount);
+						return;
+					}
 				}
 			}
 		}

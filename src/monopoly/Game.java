@@ -24,10 +24,10 @@ public class Game {
 	public static void main(String[] args) {
 
 		if (args.length != 1) {
-			System.err.println("Usage: java monopoly.Game [parameter file]");
+			System.err.println("Usage: java monopoly.Game ../data/[language code]/setup_[language code].txt");
 			System.out.println("The parameter file has to include the following lines:");
 			System.out.println(" 1  // descriptive comment");
-			System.out.println(" 2  language choice");
+			System.out.println(" 2  language code");
 			System.out.println(" 3  path to board file");
 			System.out.println(" 4  path to fields file");
 			System.out.println(" 5  path to chance cards file");
