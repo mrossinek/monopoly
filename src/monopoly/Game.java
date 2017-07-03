@@ -13,36 +13,26 @@ import java.util.ArrayList;
 
 public class Game {
 
-	public static Language language;
 	public boolean running;
+	public Language language;
+	public Board board;
+	public ArrayList<Field> listOfFields;
+	public ArrayList<Card> listOfChance;
+	public ArrayList<Card> listOfQuest;
+	public ArrayList<Player> listOfPlayers;
 
-	public Game() {
+	public String boardFile;
+	public String fieldsFile;
+	public String chanceFile;
+	public String questFile;
+
+
+	public Game(String filename, Scanner in) {
+
 		running = true;
-	}
-
-
-	public static void main(String[] args) {
-
-		if (args.length != 1) {
-			System.err.println("Usage: java monopoly.Game ../data/[language code]/setup_[language code].txt");
-			System.out.println("The parameter file has to include the following lines:");
-			System.out.println(" 1  // descriptive comment");
-			System.out.println(" 2  language code");
-			System.out.println(" 3  path to board file");
-			System.out.println(" 4  path to fields file");
-			System.out.println(" 5  path to chance cards file");
-			System.out.println(" 6  path to community chest cards file");
-			return;
-		}
-
-		String parameters = args[0];
-		String boardFile = "";
-		String fieldsFile = "";
-		String chanceFile = "";
-		String questFile = "";
 
 		try {
-			FileReader paramFile = new FileReader(parameters);
+			FileReader paramFile = new FileReader(filename);
 			BufferedReader reader = new BufferedReader(paramFile);
 
 			reader.readLine();  // discard comment line
@@ -61,138 +51,72 @@ public class Game {
 			System.err.println(e);
 		}
 
-		Scanner scanner = new Scanner(System.in);
-
-		Game game = new Game();
-		Game.welcome();
-
 		Dice.testFairness();
 
-		System.out.println();
-		System.out.println();
+    System.out.println();
+    System.out.println();
 
-		System.out.println("Setting up board...");
-		Board board = new Board(boardFile);
-		board.setupBoard();
-		board.printBoard();
+    System.out.println("Setting up board...");
+    board = new Board(boardFile);
+    board.setupBoard();
+    board.printBoard();
 
-		System.out.println();
+    System.out.println();
 
-		System.out.println("Initializing fields...");
-		ArrayList<Field> listOfFields = new ArrayList<Field>();
-		board.setupFields(fieldsFile, listOfFields);
-		board.checkFields(listOfFields);
+    System.out.println("Initializing fields...");
+    listOfFields = new ArrayList<Field>();
+    Field.setupFields(fieldsFile, listOfFields);
+    Field.checkFields(listOfFields);
 
-		System.out.println();
+    System.out.println();
 
-		System.out.println("Loading chance cards...");
-		ArrayList<Card> listOfChance = new ArrayList<Card>();
-		Card.setupCards(chanceFile, listOfChance, "Chance");
-		System.out.println("Shuffling chance cards...");
-		Card.initDeck("Chance");
-		Card.shuffleDeck("Chance");
+    System.out.println("Loading chance cards...");
+    listOfChance = new ArrayList<Card>();
+    Card.setupCards(chanceFile, listOfChance, "Chance");
+    System.out.println("Shuffling chance cards...");
+    Card.initDeck("Chance");
+    Card.shuffleDeck("Chance");
 
-		System.out.println("Loading community chest cards...");
-		ArrayList<Card> listOfQuest = new ArrayList<Card>();
-		Card.setupCards(questFile, listOfQuest, "Quest");
-		System.out.println("Shuffling community chest cards...");
-		Card.initDeck("Quest");
-		Card.shuffleDeck("Quest");
+    System.out.println("Loading community chest cards...");
+    listOfQuest = new ArrayList<Card>();
+    Card.setupCards(questFile, listOfQuest, "Quest");
+    System.out.println("Shuffling community chest cards...");
+    Card.initDeck("Quest");
+    Card.shuffleDeck("Quest");
 
-		System.out.println();
-		System.out.println();
+    System.out.println();
+    System.out.println();
 
-		System.out.println("How many players are going to play?");
+    System.out.println("How many players are going to play?");
 
-		int numberOfPlayers = 0;
-		boolean makeValidChoice = false;
+    int numberOfPlayers = 0;
+    boolean makeValidChoice = false;
 
-		while (!makeValidChoice) {
-			numberOfPlayers = scanner.nextInt();
-			if (numberOfPlayers <= 0) {
-				System.out.println("Invalid choice, please try again.");
-			} else {
-				makeValidChoice = true;
-			}
-		}
+    while (!makeValidChoice) {
+      numberOfPlayers = in.nextInt();
+      if (numberOfPlayers <= 0) {
+        System.out.println("Invalid choice, please try again.");
+      } else {
+        makeValidChoice = true;
+      }
+    }
 
-		System.out.println();
+    System.out.println();
 
-		ArrayList<Player> listOfPlayers = new ArrayList<Player>();
+    listOfPlayers = new ArrayList<Player>();
 
-		for (int i=1; i<=numberOfPlayers; ++i) {
-			System.out.println("Please provide the name of player " + i);
-			String name = scanner.next();
-			Player player = new Player(name, listOfPlayers);
-			board.placePlayer(player, listOfFields);
-			System.out.println();
-		}
+    for (int i=1; i<=numberOfPlayers; ++i) {
+      System.out.println("Please provide the name of player " + i);
+      String name = in.next();
+      Player player = new Player(name, listOfPlayers);
+      board.placePlayer(player, listOfFields);
+      System.out.println();
+    }
 
-		System.out.println();
-		System.out.println("The following players have been initialized:");
+    System.out.println();
+    System.out.println();
+    System.out.println();
 
-
-		for (Player pl : listOfPlayers) {
-			pl.printPlayer();
-		}
-
-		System.out.println();
-		System.out.println();
-		System.out.println();
-
-		System.out.println("Let's start!");
-		scanner.nextLine();
-
-		System.out.println();
-
-		while (game.running) {
-
-			for (Player pl : listOfPlayers) {
-
-				System.out.println();
-				System.out.println(pl.getName() + "'s turn");
-
-				int paschCount = 0;
-				boolean pasch = false;
-
-				do {
-					pasch = pl.throwDice(scanner);
-
-					if (pasch) {
-						paschCount++;
-
-						if (paschCount == 3) {
-							System.out.println(pl.getName() + " threw 3 Pasch in a row!");
-							pl.sendToJail(board, listOfFields);
-							break;
-						}
-					}
-					pl.doTurn(board, listOfFields, listOfPlayers, listOfChance, listOfQuest, scanner);
-				} while (pasch);
-
-				if (pl.getMoney() < 0) {
-					System.out.println(pl.getName() + " went bankrupt!");
-					game.running = false;
-				} else {
-					System.out.println("Press ENTER to end your turn");
-					scanner.nextLine();
-				}
-
-			}
-
-		}
-
-
-	}
-
-
-	public static void welcome() {
-		System.out.println();
-		System.out.println("Welcome to ");
-		System.out.println();
-		System.out.println("  M O N O P O L Y  ");
-		System.out.println();
-		System.out.println();
 	}
 
 

@@ -6,11 +6,14 @@
 
 package monopoly;
 import java.util.Scanner;
+import java.io.FileReader;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 
 
 public class Field {
 
+	private static String fieldsFile;  // name of file the fields are saved in
 
 	private int id;                          // id = position on board: 0,1,...,39
 	private int[] coordinates = new int[2];  // row and column coordinates
@@ -86,6 +89,40 @@ public class Field {
 	}
 
 
+	public static void setupFields(String filename, ArrayList<Field> ListOfFields) {
+
+		fieldsFile = filename;
+
+		try {
+			FileReader inFile = new FileReader(fieldsFile);
+			BufferedReader reader = new BufferedReader(inFile);
+
+			String line;
+
+			while ( (line = reader.readLine()) != null) {
+				String[] splitLine = line.split("\\s+");
+				Field tmpField = new Field(splitLine);
+				ListOfFields.add(tmpField);
+			}
+
+			reader.close();
+			inFile.close();
+
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
+	}
+
+
+	public static void checkFields(ArrayList<Field> fields) {
+		System.out.println();
+		for (Field f : fields) {
+			f.printField();
+		}
+	}
+
+
 	public int getId() {
 		return id;
 	}
@@ -144,7 +181,7 @@ public class Field {
 	}
 
 
-	public void analyze(Player pl, Board board, ArrayList<Field> fields, ArrayList<Player> players, ArrayList<Card> chanceDeck, ArrayList<Card>  questDeck, Scanner in) {
+	public void analyze(Player pl, Game game, Scanner in) {
 
 		System.out.println(pl.getName() + " landed on " + name);
 
@@ -159,25 +196,25 @@ public class Field {
 			jail();
 			break;
 		case ToJail:
-			toJail(pl, board, fields);
+			toJail(pl, game.board, game.listOfFields);
 			break;
 		case Chance:
-			pickChance(pl, chanceDeck);
+			pickChance(pl, game.listOfChance);
 			break;
 		case Quest:
-			pickQuest(pl, questDeck);
+			pickQuest(pl, game.listOfQuest);
 			break;
 		case Tax:
-			tax(pl, fields);
+			tax(pl, game.listOfFields);
 			break;
 		case Factory:
-			factory(pl, players, fields, in);
+			factory(pl, game.listOfPlayers, game.listOfFields, in);
 			break;
 		case Station:
-			station(pl, players, fields, in);
+			station(pl, game.listOfPlayers, game.listOfFields, in);
 			break;
 		case Street:
-			street(pl, players, fields, in);
+			street(pl, game.listOfPlayers, game.listOfFields, in);
 			break;
 		default:
 			System.err.println("An unknown error occured during the move analysis.");

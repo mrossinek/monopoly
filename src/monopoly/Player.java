@@ -132,8 +132,8 @@ public class Player {
 	}
 
 
-	public void sendToJail(Board board, ArrayList<Field> fields) {
-		fields.get(position).toJail(this, board, fields);
+	public void sendToJail(Game game) {
+		game.listOfFields.get(position).toJail(this, game.board, game.listOfFields);
 	}
 
 
@@ -177,7 +177,7 @@ public class Player {
 	}
 
 
-	public void doTurn(Board board, ArrayList<Field> fields, ArrayList<Player> players, ArrayList<Card> chanceDeck, ArrayList<Card> questDeck, Scanner in) {
+	public void doTurn(Game game, Scanner in) {
 
 		if (jailCount != 0) {
 			if (freeJailCard > 0) {
@@ -202,12 +202,12 @@ public class Player {
 			}
 		}
 
-		board.removePlayer(this, fields);
+		game.board.removePlayer(this, game.listOfFields);
 		updatePosition();
-		board.placePlayer(this, fields);
-		board.printBoard();
+		game.board.placePlayer(this, game.listOfFields);
+		game.board.printBoard();
 
-		fields.get(position).analyze(this, board, fields, players, chanceDeck, questDeck, in);
+		game.listOfFields.get(position).analyze(this, game, in);
 		in.nextLine();
 
 	}

@@ -16,7 +16,7 @@ cd bin
 
 ```
 cd bin
-java monopoly.Game ../data/[language code]/setup_[language code].txt
+java monopoly.Main ../data/[language code]/setup_[language code].txt
 ```
 
 Exemplary UK and DE setup files are provided within this github repository.

@@ -17,7 +17,6 @@ public class Board {
 	private int rows;           // number of rows on board
 	private int cols;           // number of columns on board
 	private String boardFile;   // name of file the board is saved in
-	private String fieldsFile;  // name of file the fields are saved in
 
 
 	public Board(String filename) {
@@ -85,40 +84,6 @@ public class Board {
 			System.out.println();
 		}
 
-	}
-
-
-	public void setupFields(String filename, ArrayList<Field> ListOfFields) {
-
-		fieldsFile = filename;
-
-		try {
-			FileReader inFile = new FileReader(fieldsFile);
-			BufferedReader reader = new BufferedReader(inFile);
-
-			String line;
-
-			while ( (line = reader.readLine()) != null) {
-				String[] splitLine = line.split("\\s+");
-				Field tmpField = new Field(splitLine);
-				ListOfFields.add(tmpField);
-			}
-
-			reader.close();
-			inFile.close();
-
-		} catch (Exception e) {
-			System.err.println(e);
-		}
-
-	}
-
-
-	public void checkFields(ArrayList<Field> fields) {
-		System.out.println();
-		for (Field f : fields) {
-			f.printField();
-		}
 	}
 
 	public void placePlayer(Player pl, ArrayList<Field> fields) {
