@@ -146,7 +146,7 @@ public class Field {
 	}
 
 
-	public void analyze(Player pl, Board board, ArrayList<Field> fields, ArrayList<Player> players, Scanner in) {
+	public void analyze(Player pl, Board board, ArrayList<Field> fields, ArrayList<Player> players, ArrayList<Card> chanceDeck, ArrayList<Card>  questDeck, Scanner in) {
 
 		System.out.println(pl.getName() + " landed on " + name);
 
@@ -164,10 +164,10 @@ public class Field {
 			toJail(pl, board, fields);
 			break;
 		case Chance:
-			pickChance(pl);
+			pickChance(pl, chanceDeck);
 			break;
 		case Quest:
-			pickQuest(pl);
+			pickQuest(pl, questDeck);
 			break;
 		case Tax:
 			tax(pl, fields);
@@ -255,17 +255,15 @@ public class Field {
 	}
 
 
-	public void pickChance(Player pl) {
+	public void pickChance(Player pl, ArrayList<Card> chanceDeck) {
 		System.out.println(pl.getName() + " picked a Chance card:");
-		System.err.println("Not implemented yet.");
-		// TODO implement Chance cards
+		Card.pickCard(chanceDeck, "Chance");
 	}
 
 
-	public void pickQuest(Player pl) {
+	public void pickQuest(Player pl, ArrayList<Card> questDeck) {
 		System.out.println(pl.getName() + " picked a Community Chest card:");
-		System.err.println("Not implemented yet.");
-		// TODO implement Community Chest cards
+		Card.pickCard(questDeck, "Quest");
 	}
 
 

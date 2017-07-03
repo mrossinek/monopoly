@@ -129,6 +129,7 @@ public class Card {
       ar[i] = a;
     }
   }
+  
 
   public static void printArray(int[] ar) {
     for (int i=0; i<ar.length; ++i) {

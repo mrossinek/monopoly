@@ -163,7 +163,7 @@ public class Player {
 	}
 
 
-	public void doTurn(Board board, ArrayList<Field> fields, ArrayList<Player> players, Scanner in) {
+	public void doTurn(Board board, ArrayList<Field> fields, ArrayList<Player> players, ArrayList<Card> chanceDeck, ArrayList<Card> questDeck, Scanner in) {
 
 		if (jailCount != 0) {
 			if (pasch) {
@@ -188,7 +188,7 @@ public class Player {
 		board.placePlayer(this, fields);
 		board.printBoard();
 
-		fields.get(position).analyze(this, board, fields, players, in);
+		fields.get(position).analyze(this, board, fields, players, chanceDeck, questDeck, in);
 		in.nextLine();
 
 	}

@@ -165,7 +165,7 @@ public class Game {
 							break;
 						}
 					}
-					pl.doTurn(board, listOfFields, listOfPlayers, scanner);
+					pl.doTurn(board, listOfFields, listOfPlayers, listOfChance, listOfQuest, scanner);
 				} while (pasch);
 
 				if (pl.getMoney() < 0) {
