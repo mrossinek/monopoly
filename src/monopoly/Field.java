@@ -82,6 +82,7 @@ public class Field {
 			break;
 		default:
 			System.err.println(type + " is not a valid field type.");
+			return;
 		}
 
 	}

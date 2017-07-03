@@ -26,6 +26,12 @@ public class Game {
 
 		if (args.length != 1) {
 			System.err.println("Usage: java monopoly.Game [parameter file]");
+			System.out.println("The parameter file has to include the following lines:");
+			System.out.println(" 1  // descriptive comment");
+			System.out.println(" 2  path to board file");
+			System.out.println(" 3  path to fields file");
+			System.out.println(" 4  path to chance cards file");
+			System.out.println(" 5  path to community chest cards file");
 			return;
 		}
 
@@ -74,6 +80,22 @@ public class Game {
 		ArrayList<Field> listOfFields = new ArrayList<Field>();
 		board.setupFields(fieldsFile, listOfFields);
 		board.checkFields(listOfFields);
+
+		System.out.println();
+
+		System.out.println("Loading chance cards...");
+		ArrayList<Card> listOfChance = new ArrayList<Card>();
+		Card.setupCards(chanceFile, listOfChance, "Chance");
+		System.out.println("Shuffling chance cards...");
+		Card.initDeck("Chance");
+		Card.shuffleDeck("Chance");
+
+		System.out.println("Loading community chest cards...");
+		ArrayList<Card> listOfQuest = new ArrayList<Card>();
+		Card.setupCards(questFile, listOfQuest, "Quest");
+		System.out.println("Shuffling community chest cards...");
+		Card.initDeck("Quest");
+		Card.shuffleDeck("Quest");
 
 		System.out.println();
 		System.out.println();
