@@ -18,15 +18,17 @@ public class Card {
   public static int[] chanceDeck; // public deck of chance cards
   public static int[] questDeck;  // public deck of community chest cards
 
+  private CardCategory category;
   private CardType type;
   private int id;
   private String instruction;
 
-  public Card(String inst, String t) {
+  public Card(String inst, String tp, String cat) {
     instruction = inst;
-    type = CardType.valueOf(t);
+    type = CardType.valueOf(tp);
+    category = CardCategory.valueOf(cat);
 
-    switch (type) {
+    switch (category) {
     case Chance:
       id = countChance;
       countChance++;
@@ -36,10 +38,15 @@ public class Card {
       countQuest++;
       break;
     default:
-      System.err.println("Unknown card type!");
+      System.err.println("Unknown card category!");
       return;
     }
 
+  }
+
+
+  public CardCategory getCategory() {
+    return this.category;
   }
 
 
@@ -48,12 +55,17 @@ public class Card {
   }
 
 
-  public void getInstruction() {
+  public String getInstruction() {
+    return this.instruction;
+  }
+
+
+  public void printInstruction() {
     System.out.println(instruction);
   }
 
 
-  public static void setupCards(String filename, ArrayList<Card> deck, String type) {
+  public static void setupCards(String filename, ArrayList<Card> deck, String cat) {
 
     try {
       FileReader inFile = new FileReader(filename);
@@ -62,7 +74,11 @@ public class Card {
       String line;
 
       while ( (line = reader.readLine()) != null) {
-        Card tmpCard = new Card(line, type);
+        // cut card category label
+        String tp = line.substring(0,6);
+        String inst = line.substring(7,line.length());
+
+        Card tmpCard = new Card(inst, tp, cat);
         deck.add(tmpCard);
       }
 
@@ -75,8 +91,8 @@ public class Card {
 
   }
 
-  public static void initDeck(String t) {
-    CardType ct = CardType.valueOf(t);
+  public static void initDeck(String cat) {
+    CardCategory ct = CardCategory.valueOf(cat);
 
     switch (ct) {
     case Chance:
@@ -94,13 +110,13 @@ public class Card {
       // printArray(questDeck);
       break;
     default:
-      System.err.println("Unknown card type!");
+      System.err.println("Unknown card category!");
     }
   }
 
 
-  public static void shuffleDeck(String t) {
-    CardType ct = CardType.valueOf(t);
+  public static void shuffleDeck(String cat) {
+    CardCategory ct = CardCategory.valueOf(cat);
 
     switch (ct) {
     case Chance:
@@ -112,7 +128,7 @@ public class Card {
       // printArray(questDeck);
       break;
     default:
-      System.err.println("Unknown card type!");
+      System.err.println("Unknown card category!");
     }
   }
 
@@ -137,8 +153,8 @@ public class Card {
   }
 
 
-  public static void pickCard(ArrayList<Card> deck, String t) {
-    CardType ct = CardType.valueOf(t);
+  public static void pickCard(ArrayList<Card> deck, String cat) {
+    CardCategory ct = CardCategory.valueOf(cat);
     int cardID = -1;
 
     switch (ct) {
@@ -153,7 +169,7 @@ public class Card {
       // printArray(questDeck);
       break;
     default:
-      System.err.println("Unknown card type!");
+      System.err.println("Unknown card category!");
       return;
     }
 
@@ -161,7 +177,8 @@ public class Card {
       System.err.println("No cards in deck!");
       return;
     } else {
-      deck.get(cardID).getInstruction();
+      Card card = deck.get(cardID);
+      card.analyzeCard();
     }
   }
 
@@ -176,19 +193,41 @@ public class Card {
   }
 
 
+  public void analyzeCard() {
+    printInstruction();
+
+    switch (type) {
+    case GET_BA:
+      //
+      break;
+  	case GET_PL:
+      //
+      break;
+  	case PAY_FP:
+      //
+      break;
+  	case PAY_PL:
+      //
+      break;
+  	case PAY_HH:
+      System.err.println("Houses and hotels have not been implemented yet.");
+      break;
+  	case MOVE_Y:
+      //
+      break;
+  	case MOVE_N:
+      //
+      break;
+  	case FREEJC:
+      //
+      break;
+    default:
+     System.err.println("Unknown card type!");
+     return;
+    }
+
+  }
+
+
 
 }
-
-
-/* possible actions happening:
-  get money
-    -> receive from bank GET_BA
-    -> receive from all other players GET_PL
-  pay money
-    -> pay to free parking PAY_FP
-    -> pay to all other players PAY_PL
-  move to field
-    -> get money on the way MOVE_Y
-    -> do not get money on the way MOVE_N
-  receive a get-out-of-jail card JAIL_CARD
-*/

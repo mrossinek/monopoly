@@ -1,16 +1,16 @@
-Ruecke vor bis auf Los – ziehe $200 ein
-Ein Bankirrtum zu deinen Gunsten – ziehe $200 ein
-Zahle Arztrechnungen von $50
-Aus Lagerverkaeufen erhaelst du $45
-Frei-aus-dem-Gefaengis – du darfst diese Karte behalten, bis du sie brauchst
-Gehe direkt ins Gefaengnis – gehe nicht ueber Los – ziehe keine $200 ein
-Eroeffnungsfeier – ziehe $50 von jedem Spieler ein
-Weihnachtsbonus – ziehe $100 ein
-Einkommenssteuer-Rueckzahlungen – ziehe $20 ein
-Lebensversicherung-Rueckzahlungen – ziehe $100 ein
-Zahle an das Krankenhaus $100
-Zahle Schulgeld $150
-Erhalte als Nachhilfe-Lehrer $25
-Eine Haeuser-Sanierung wird faellig – $40 pro Haus – $115 pro Hotel
-Du hast den zweiten Preis in einer Schoenheitskonkurrenz gewonnen – Ziehe $10 ein
-Du erbst $100
+MOVE_Y Ruecke vor bis auf Los – ziehe $200 ein
+GET_BA Ein Bankirrtum zu deinen Gunsten – ziehe $200 ein
+PAY_FP Zahle Arztrechnungen von $50
+GET_BA Aus Lagerverkaeufen erhaelst du $45
+FREEJC Frei-aus-dem-Gefaengis – du darfst diese Karte behalten, bis du sie brauchst
+MOVE_N Gehe direkt ins Gefaengnis – gehe nicht ueber Los – ziehe keine $200 ein
+GET_PL Eroeffnungsfeier – ziehe $50 von jedem Spieler ein
+GET_BA Weihnachtsbonus – ziehe $100 ein
+GET_BA Einkommenssteuer-Rueckzahlungen – ziehe $20 ein
+GET_BA Lebensversicherung-Rueckzahlungen – ziehe $100 ein
+PAY_FP Zahle an das Krankenhaus $100
+PAY_FP Zahle Schulgeld $150
+GET_BA Erhalte als Nachhilfe-Lehrer $25
+PAY_HH Eine Haeuser-Sanierung wird faellig – $40 pro Haus – $115 pro Hotel
+GET_BA Du hast den zweiten Preis in einer Schoenheitskonkurrenz gewonnen – Ziehe $10 ein
+GET_BA Du erbst $100
