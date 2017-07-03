@@ -1,8 +1,6 @@
 /*
  * Language
  *
- * 03/07/2017
- *
  * Max Rossmannek
  */
 

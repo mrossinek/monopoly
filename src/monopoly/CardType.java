@@ -1,8 +1,6 @@
 /*
  * CardType
  *
- * 02/07/2017
- *
  * Max Rossmannek
  */
 

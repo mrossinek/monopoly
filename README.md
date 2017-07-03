@@ -16,7 +16,7 @@ cd bin
 
 ```
 cd bin
-java monopoly.Game [board file] [fields file]
+java monopoly.Game ../data/[language code]/setup_[language code].txt
 ```
 
-An exemplary `board.txt` and `fields.txt` are included in this git directory.
+Exemplary UK and DE setup files are provided within this github repository.

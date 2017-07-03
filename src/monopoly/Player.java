@@ -1,8 +1,6 @@
 /*
  * Player
  *
- * 28/06/2017
- *
  * Max Rossmannek
  */
 
