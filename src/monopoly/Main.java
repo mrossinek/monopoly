@@ -30,7 +30,12 @@ public class Main {
 
     Game game = new Game(args[0], scanner);
 
+    for (int i=0; i<10; ++i) {
+      Card.pickCard(game.listOfPlayers.get(0), game, "Chance");
+      Card.pickCard(game.listOfPlayers.get(0), game, "Quest");
+    }
 
+    /*
     System.out.println("Let's start!");
     scanner.nextLine();
 
@@ -72,6 +77,7 @@ public class Main {
       }
 
     }
+    */
 
 
   }

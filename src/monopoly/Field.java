@@ -199,10 +199,10 @@ public class Field {
 			toJail(pl, game.board, game.listOfFields);
 			break;
 		case Chance:
-			pickChance(pl, game.listOfChance);
+			pickChance(pl, game);
 			break;
 		case Quest:
-			pickQuest(pl, game.listOfQuest);
+			pickQuest(pl, game);
 			break;
 		case Tax:
 			tax(pl, game.listOfFields);
@@ -290,15 +290,15 @@ public class Field {
 	}
 
 
-	public void pickChance(Player pl, ArrayList<Card> chanceDeck) {
+	public void pickChance(Player pl, Game game) {
 		System.out.println(pl.getName() + " picked a Chance card:");
-		Card.pickCard(chanceDeck, "Chance");
+		Card.pickCard(pl, game, "Chance");
 	}
 
 
-	public void pickQuest(Player pl, ArrayList<Card> questDeck) {
+	public void pickQuest(Player pl, Game game) {
 		System.out.println(pl.getName() + " picked a Community Chest card:");
-		Card.pickCard(questDeck, "Quest");
+		Card.pickCard(pl, game, "Quest");
 	}
 
 

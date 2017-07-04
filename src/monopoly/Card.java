@@ -153,17 +153,20 @@ public class Card {
   }
 
 
-  public static void pickCard(ArrayList<Card> deck, String cat) {
+  public static void pickCard(Player pl, Game game, String cat) {
     CardCategory ct = CardCategory.valueOf(cat);
+    ArrayList<Card> deck;
     int cardID = -1;
 
     switch (ct) {
     case Chance:
+      deck = game.listOfChance;
       cardID = chanceDeck[0];
       placeCardDown(chanceDeck);
       // printArray(chanceDeck);
       break;
     case Quest:
+      deck = game.listOfQuest;
       cardID = questDeck[0];
       placeCardDown(questDeck);
       // printArray(questDeck);
@@ -178,7 +181,7 @@ public class Card {
       return;
     } else {
       Card card = deck.get(cardID);
-      card.analyzeCard();
+      card.analyzeCard(pl, game);
     }
   }
 
@@ -193,39 +196,78 @@ public class Card {
   }
 
 
-  public void analyzeCard() {
+  public void analyzeCard(Player pl, Game game) {
     printInstruction();
 
+    int value = 0;
+
     switch (type) {
+
     case GET_BA:
-      //
+      value = extractValue(instruction);
+      pl.increaseMoney(value);
+      System.out.println(pl.getName() + " now owns $" + pl.getMoney());
       break;
+
   	case GET_PL:
-      //
+      value = extractValue(instruction);
+      pl.increaseMoney(value * (Player.getCount() - 1));
+      System.out.println(pl.getName() + " now owns $" + pl.getMoney());
+      for (Player pl2 : game.listOfPlayers) {
+        if (pl.getId() != pl2.getId()) {
+          pl2.decreaseMoney(value);
+          System.out.println(pl2.getName() + " now owns $" + pl2.getMoney());
+        }
+      }
       break;
+
   	case PAY_FP:
-      //
+      Field parking = game.listOfFields.get(20);
+      value = extractValue(instruction);
+      pl.decreaseMoney(value);
+      parking.updateParking(parking, value);
+      System.out.println(pl.getName() + " now owns $" + pl.getMoney());
+      System.out.println("Free Parking now holds $" + parking.checkParking(parking));
       break;
+
   	case PAY_PL:
-      //
+      value = extractValue(instruction);
+      pl.decreaseMoney(value * (Player.getCount() - 1));
+      System.out.println(pl.getName() + " now owns $" + pl.getMoney());
+      for (Player pl2 : game.listOfPlayers) {
+        if (pl.getId() != pl2.getId()) {
+          pl2.increaseMoney(value);
+          System.out.println(pl2.getName() + " now owns $" + pl2.getMoney());
+        }
+      }
       break;
+
   	case PAY_HH:
       System.err.println("Houses and hotels have not been implemented yet.");
       break;
+
   	case MOVE_Y:
       //
       break;
+
   	case MOVE_N:
       //
       break;
+
   	case FREEJC:
-      //
+      pl.increaseFreeJailCard();
+      System.out.println(pl.getName() + " now owns " + pl.getFreeJailCard() + " get-out-of-jail cards.");
       break;
     default:
      System.err.println("Unknown card type!");
      return;
+     
     }
 
+  }
+
+  public static int extractValue(String t) {
+    return Integer.parseInt(t.replaceAll("[^0-9]", ""));
   }
 
 
