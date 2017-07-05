@@ -1,16 +1,16 @@
-MOVE_Y Advance to Go (Collect $200)
-MOVE_Y Advance to Trafalgar Square - If you pass Go, collect $200
-MOVE_Y Advance to Pall Mall – If you pass Go, collect $200
-MOVE_Y Advance to nearest Factory. If unowned, you may buy it from the Bank. If owned, throw 1 dice and pay owner a total ten times the amount thrown.
-MOVE_Y Advance to the nearest Station and pay owner twice the rental to which otherwise entitled. If Station is unowned, you may buy it from the Bank.
-GET_BA Bank pays you dividend of $50
-FREEJC Get out of Jail, Free – This card may be kept until needed
-MOVE_N Go Back 3 Spaces
-MOVE_N Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200
-PAY_HH Make general repairs on all your property – For each house pay $25 – For each hotel $100
-PAY_FP ay a speeding fine of $15
-MOVE_Y Take a trip to Kings Cross Station – If you pass Go, collect $200
-MOVE_N Take a walk at Mayfair – Advance to Mayfair
-PAY_PL You have been elected Chairman of the Board – Pay each player $50
-GET_BA Your building loan matures – Collect $150
-GET_BA You have won a crossword competition - Collect $100
+MOVE_Y GO0 Advance to Go (Collect $200)
+MOVE_Y S24 Advance to Trafalgar Square - If you pass Go, collect $200
+MOVE_Y S11 Advance to Pall Mall – If you pass Go, collect $200
+MOVE_Y FAC Advance to nearest Factory. If unowned, you may buy it from the Bank. If owned, throw 1 dice and pay owner a total ten times the amount thrown.
+MOVE_Y STA Advance to the nearest Station and pay owner twice the rental to which otherwise entitled. If Station is unowned, you may buy it from the Bank.
+GET_BA 050 Bank pays you dividend of $50
+FREEJC XXX Get out of Jail, Free – This card may be kept until needed
+MOVE_N BK3 Go Back 3 Spaces
+MOVE_N J10 Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200
+PAY_HH XXX Make general repairs on all your property – For each house pay $25 – For each hotel $100
+PAY_FP 015 Pay a speeding fine of $15
+MOVE_Y S05 Take a trip to Kings Cross Station – If you pass Go, collect $200
+MOVE_N S39 Take a walk at Mayfair – Advance to Mayfair
+PAY_PL 050 You have been elected Chairman of the Board – Pay each player $50
+GET_BA 150 Your building loan matures – Collect $150
+GET_BA 100 You have won a crossword competition - Collect $100

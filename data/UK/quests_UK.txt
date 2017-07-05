@@ -1,16 +1,16 @@
-MOVE_Y Advance to Go (Collect $200)
-GET_BA Bank error in your favor – Collect $200
-PAY_FP Doctor's fee – Pay $50
-GET_BA From sale of stock you get $45
-FREEJC Get out of Jail, Free – This card may be kept until needed
-MOVE_N Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200
-GET_PL Opening – Collect $50 from every player for opening night seats
-GET_BA Xmas Fund matures - Collect $100
-GET_BA Income tax refund – Collect $20
-GET_BA Life insurance matures – Collect $100
-PAY_FP Pay hospital $100
-PAY_FP Pay school tax of $150
-GET_BA Receive for services $25
-PAY_HH You are assessed for street repairs – $40 per house – $115 per hotel
-GET_BA You have won second prize in a beauty contest – Collect $10
-GET_BA You inherit $100
+MOVE_Y GO0 Advance to Go (Collect $200)
+GET_BA 200 Bank error in your favor – Collect $200
+PAY_FP 050 Doctor's fee – Pay $50
+GET_BA 045 From sale of stock you get $45
+FREEJC XXX Get out of Jail, Free – This card may be kept until needed
+MOVE_N J10 Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200
+GET_PL 050 Opening – Collect $50 from every player for opening night seats
+GET_BA 100 Xmas Fund matures - Collect $100
+GET_BA 020 Income tax refund – Collect $20
+GET_BA 100 Life insurance matures – Collect $100
+PAY_FP 100 Pay hospital $100
+PAY_FP 150 Pay school tax of $150
+GET_BA 025 Receive for services $25
+PAY_HH XXX You are assessed for street repairs – $40 per house – $115 per hotel
+GET_BA 010 You have won second prize in a beauty contest – Collect $10
+GET_BA 100 You inherit $100

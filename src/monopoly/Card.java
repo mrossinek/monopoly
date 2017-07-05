@@ -21,10 +21,12 @@ public class Card {
   private CardCategory category;
   private CardType type;
   private int id;
+  private String key;
   private String instruction;
 
-  public Card(String inst, String tp, String cat) {
+  public Card(String inst, String tp, String k, String cat) {
     instruction = inst;
+    key = k;
     type = CardType.valueOf(tp);
     category = CardCategory.valueOf(cat);
 
@@ -55,6 +57,11 @@ public class Card {
   }
 
 
+  public String getKey() {
+    return this.key;
+  }
+
+
   public String getInstruction() {
     return this.instruction;
   }
@@ -76,9 +83,10 @@ public class Card {
       while ( (line = reader.readLine()) != null) {
         // cut card category label
         String tp = line.substring(0,6);
-        String inst = line.substring(7,line.length());
+        String key = line.substring(7,10);
+        String inst = line.substring(11,line.length());
 
-        Card tmpCard = new Card(inst, tp, cat);
+        Card tmpCard = new Card(inst, tp, key, cat);
         deck.add(tmpCard);
       }
 
@@ -200,17 +208,19 @@ public class Card {
     printInstruction();
 
     int value = 0;
+    int old_pos;
+    int new_pos;
 
     switch (type) {
 
     case GET_BA:
-      value = extractValue(instruction);
+      value = Integer.parseInt(getKey());
       pl.increaseMoney(value);
       System.out.println(pl.getName() + " now owns $" + pl.getMoney());
       break;
 
   	case GET_PL:
-      value = extractValue(instruction);
+      value = Integer.parseInt(getKey());
       pl.increaseMoney(value * (Player.getCount() - 1));
       System.out.println(pl.getName() + " now owns $" + pl.getMoney());
       for (Player pl2 : game.listOfPlayers) {
@@ -223,7 +233,7 @@ public class Card {
 
   	case PAY_FP:
       Field parking = game.listOfFields.get(20);
-      value = extractValue(instruction);
+      value = Integer.parseInt(getKey());
       pl.decreaseMoney(value);
       parking.updateParking(parking, value);
       System.out.println(pl.getName() + " now owns $" + pl.getMoney());
@@ -231,7 +241,7 @@ public class Card {
       break;
 
   	case PAY_PL:
-      value = extractValue(instruction);
+      value = Integer.parseInt(getKey());
       pl.decreaseMoney(value * (Player.getCount() - 1));
       System.out.println(pl.getName() + " now owns $" + pl.getMoney());
       for (Player pl2 : game.listOfPlayers) {
@@ -247,11 +257,13 @@ public class Card {
       break;
 
   	case MOVE_Y:
-      //
+      old_pos = pl.getPosition();
+      new_pos = getPlayerNextPosition(old_pos);
       break;
 
   	case MOVE_N:
-      //
+    old_pos = pl.getPosition();
+    new_pos = getPlayerNextPosition(old_pos);
       break;
 
   	case FREEJC:
@@ -261,15 +273,53 @@ public class Card {
     default:
      System.err.println("Unknown card type!");
      return;
-     
+
     }
 
   }
 
-  public static int extractValue(String t) {
-    return Integer.parseInt(t.replaceAll("[^0-9]", ""));
-  }
 
+  public int getPlayerNextPosition(int old_pos) {
+    int pos = 40;  // player will stay put where he is
+    String tmp = key.replaceAll("[0-9]", "");
+
+    switch (tmp) {
+    case "GO":
+      pos = 0;
+      break;
+    case "J":
+      pos = 30;
+      break;
+    case "BK":
+      pos = (old_pos-3) % 40;
+      break;
+    case "FAC":
+      if (old_pos < 12 || old_pos > 28) {
+        pos = 12;
+      } else {
+        pos = 28;
+      }
+      break;
+    case "STA":
+      if (old_pos < 5 || old_pos > 35) {
+        pos = 5;
+      } else if (old_pos < 15) {
+        pos = 15;
+      } else if (old_pos < 25) {
+        pos = 25;
+      } else {
+        pos = 35;
+      }
+      break;
+    case "S":
+      pos = Integer.parseInt(key.replaceAll("^[0-9]", ""));
+      break;
+    default:
+      System.out.println("Unknown action card key");
+    }
+
+    return pos;
+  }
 
 
 }
