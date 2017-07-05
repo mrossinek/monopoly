@@ -259,11 +259,13 @@ public class Card {
   	case MOVE_Y:
       old_pos = pl.getPosition();
       new_pos = getPlayerNextPosition(old_pos);
+      System.out.println(old_pos + " -> " + new_pos);
       break;
 
   	case MOVE_N:
-    old_pos = pl.getPosition();
-    new_pos = getPlayerNextPosition(old_pos);
+      old_pos = pl.getPosition();
+      new_pos = getPlayerNextPosition(old_pos);
+      System.out.println(old_pos + " -> " + new_pos);
       break;
 
   	case FREEJC:
@@ -312,7 +314,7 @@ public class Card {
       }
       break;
     case "S":
-      pos = Integer.parseInt(key.replaceAll("^[0-9]", ""));
+      pos = Integer.parseInt(key.replaceAll("[^0-9]", ""));
       break;
     default:
       System.out.println("Unknown action card key");

@@ -1,16 +1,16 @@
-MOVE_Y Ruecke vor bis auf Los – ziehe $200 ein
-MOVE_Y Ruecke vor bis zum Opernplatz – wenn du ueber Los gehst, ziehe $200 ein
-MOVE_Y Ruecke vor bis zur Neuen Strasse – wenn du ueber Los gehst, ziehe $200 ein
-MOVE_Y Ruecke vor bis zur naechsten Fabrik. Falls sie niemandem gehoert, kannst du sie kaufen, ansonsten wuerfle erneut und zahle entsprechend
-MOVE_Y Ruecke vor bis zum naechsten Bahnhof. Falls er niemandem gehoert, kannst du ihn kaufen, ansonsten zahle dem Besitzer das Doppelte
-GET_BA Die Bank zahlt dir eine Dividende von $50
-FREEJC Frei-aus-dem-Gefaengis – du darfst diese Karte behalten, bis du sie brauchst
-MOVE_N Gehe 3 Felder zurueck
-MOVE_N Gehe direkt ins Gefaengnis – gehe nicht ueber Los – ziehe keine $200 ein
-PAY_HH Eine Haeuser-Sanierung wird faellig – zahle fuer jedes Haus $25 – fuer jedes Hotel $100
-PAY_FP Zahle eine Strafe fuer zu schnelles Fahren – $15
-MOVE_Y Ruecke vor bis zum Suedahnhof – wenn du ueber Los gehst, ziehe $200 ein
-MOVE_N Ruecke vor bis zur Schlossallee
-PAY_PL Du wurdest zum Buergermeister gewaehlt – zahle jedem Spieler $50
-GET_BA Deine Rendite wird faellig – ziehe $150 ein
-GET_BA Du hast in einem Kreuzwortraetsel-Wettbewerb gewonnen – ziehe $100 ein
+MOVE_Y GO0 Ruecke vor bis auf Los – ziehe $200 ein
+MOVE_Y S24 Ruecke vor bis zum Opernplatz – wenn du ueber Los gehst, ziehe $200 ein
+MOVE_Y S11 Ruecke vor bis zur Neuen Strasse – wenn du ueber Los gehst, ziehe $200 ein
+MOVE_Y FAC Ruecke vor bis zur naechsten Fabrik. Falls sie niemandem gehoert, kannst du sie kaufen, ansonsten wuerfle erneut und zahle entsprechend
+MOVE_Y STA Ruecke vor bis zum naechsten Bahnhof. Falls er niemandem gehoert, kannst du ihn kaufen, ansonsten zahle dem Besitzer das Doppelte
+GET_BA 050 Die Bank zahlt dir eine Dividende von $50
+FREEJC XXX Frei-aus-dem-Gefaengis – du darfst diese Karte behalten, bis du sie brauchst
+MOVE_N BK3 Gehe 3 Felder zurueck
+MOVE_N J10 Gehe direkt ins Gefaengnis – gehe nicht ueber Los – ziehe keine $200 ein
+PAY_HH XXX Eine Haeuser-Sanierung wird faellig – zahle fuer jedes Haus $25 – fuer jedes Hotel $100
+PAY_FP 015 Zahle eine Strafe fuer zu schnelles Fahren – $15
+MOVE_Y S05 Ruecke vor bis zum Suedahnhof – wenn du ueber Los gehst, ziehe $200 ein
+MOVE_N S39 Ruecke vor bis zur Schlossallee
+PAY_PL 050 Du wurdest zum Buergermeister gewaehlt – zahle jedem Spieler $50
+GET_BA 150 Deine Rendite wird faellig – ziehe $150 ein
+GET_BA 100 Du hast in einem Kreuzwortraetsel-Wettbewerb gewonnen – ziehe $100 ein
