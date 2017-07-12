@@ -260,12 +260,14 @@ public class Card {
       old_pos = pl.getPosition();
       new_pos = getPlayerNextPosition(old_pos);
       System.out.println(old_pos + " -> " + new_pos);
+      // TODO
       break;
 
   	case MOVE_N:
       old_pos = pl.getPosition();
       new_pos = getPlayerNextPosition(old_pos);
       System.out.println(old_pos + " -> " + new_pos);
+      // TODO
       break;
 
   	case FREEJC:
